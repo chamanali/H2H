@@ -11,7 +11,7 @@ public class NewsItem {
     String category;
     String guid;
     String description;
-    String pubDate;
+    String date;
 
 
  public String toString(){

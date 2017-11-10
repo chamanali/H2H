@@ -27,7 +27,7 @@ public class NewsLive extends AppCompatActivity {
 
     ListView lvnews;
     ArrayList<NewsItem> newslist;
-    ArrayAdapter adapter;
+    NewsAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +59,7 @@ public class NewsLive extends AppCompatActivity {
                     String pubDate = item.child ( 3 ).text ();
                     String category = item.child ( 4 ).text ();
                     String guid = item.child ( 5 ).text ();
-                    String description = item.child ( 6 ).text ();
+                    String description = item.child ( 8 ).text ();
                     Document doc2 = Jsoup.parse ( description );
                     String txt = doc2.getElementsByTag ("p").text ();
 
@@ -71,6 +71,7 @@ public class NewsLive extends AppCompatActivity {
                     news.guid = guid;
                     news.comments = comments;
                     news.category = category;
+                    news.date = pubDate;
 
 
                     newslist.add ( news );
@@ -82,7 +83,7 @@ public class NewsLive extends AppCompatActivity {
                     Log.i ( "mytag", "comments "+comments);
                     Log.i ( "mytag","Category "+ category );
                     Log.i ( "mytag","GUID "+ guid);
-                    Log.i ( "mytag","Title "+ description );
+                    Log.i ( "mytag","description "+ description );
                     Log.i ( "mytag","text "+ txt );
 
 
@@ -94,7 +95,7 @@ public class NewsLive extends AppCompatActivity {
                 Log.i ( "mytag", "item found "+itemElements.size ());
                 Log.i ( "mytag", "items in news list "+newslist.size ());
 
-                adapter = new ArrayAdapter<> (NewsLive.this, android.R.layout.simple_list_item_1, newslist );
+                adapter = new NewsAdapter (NewsLive.this, newslist );
                 lvnews.setAdapter ( adapter );
 
 
