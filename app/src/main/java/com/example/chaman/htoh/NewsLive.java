@@ -1,9 +1,12 @@
 package com.example.chaman.htoh;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -97,6 +100,20 @@ public class NewsLive extends AppCompatActivity {
 
                 adapter = new NewsAdapter (NewsLive.this, newslist );
                 lvnews.setAdapter ( adapter );
+
+                lvnews.setOnItemClickListener ( new AdapterView.OnItemClickListener ( ) {
+                    @Override
+                    public void onItemClick(AdapterView <?> parent, View view, int position, long id) {
+
+                        NewsItem currentNews = newslist.get ( position );
+
+                        Intent intent = new Intent ( NewsLive.this, NewsDetailsActivity.class );
+
+                        intent.putExtra ( "NewsItems ", currentNews  );
+
+                        startActivity ( intent );
+                    }
+                } );
 
 
             }
